@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+	<title>Bruce the Bot Cheat Sheet</title>
+
+	<style>
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+	</style>
+
+	<link href="http://gvsu.edu/cms3/assets/741ECAAE-BD54-A816-71DAF591D1D7955C/libui.css" rel="stylesheet" type="text/css" />
+
+	<style>
+		[role="main"] { width: 90%; margin: 0 auto; max-width: 48em; background: #fff; border-left: 1px solid #bbb; border-right: 1px solid #bbb; padding: 0 1%; -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box;}
+		body { background: #ddd;font-family: helvetica, arial, verdana, sans-serif;}
+		h1 { font-size: 2em; font-weight: bold; font-family: helvetica, arial, verdana, sans-serif;margin-bottom: .5em;}
+		h2 { font-size: 1.6em; font-weight: bold;margin: 1.1em 0;}
+		h1, h2, h3, h4, h5 { color: #333;}
+		h3 { font-size: 1.4em; font-weight: bold; background: transparent !important; padding: .2em 0;}
+		.instructions { padding: 0 .1% 0 2%; width: 95%;}
+		.task { border: 1px solid #bbb; padding: .6em; margin-bottom: .8em;  }
+		pre { margin: .4em 0; font-family: menlo, courier, monospace; padding: .5em; background: #444; color: #fff;}
+		dl { margin: 1em 0;padding-left: 1em;}
+		dt { margin: .8em 0;}
+		dd { margin: .5em 1em;}
+		.footer { padding: 1em 0; margin-top: 1em; border-top: 1px solid #bbb;}
+		#sounds ul { font-family: menlo, courier, monospace;}
+		#sounds ul li { margin-bottom: .5em;}
+	</style>
+</head>
+
+<body>
+<div role="main">
+	<div class="line">
+		<div class="span1 unit">
+			<h1>Bruce Bot Cheat Sheet</h1>
+
+			<p>Bruce is the bot that lives in our Campfire chat room. He can make your work day easier by deploying code to our production and development servers, keep track of what you are working on for the rest of the team, and even help you have a little fun. This page tells you how to use him.</p>
+
+			<div class="lib-horizontal-list">
+				<ul>
+					<li><strong>Select from:</strong></li>
+					<li><a href="#work">Work Tasks</a></li>
+					<li><a href="#images">Images</a></li>
+					<li><a href="#search">Search</a></li>
+					<li><a href="#sounds">Sounds</a></li>
+					<li><a href="http://www.emoji-cheat-sheet.com/">Emoji</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+
+	<div class="line" id="work" style="border-top: 1px solid #bbb; margin-top: 1em;">
+		<h2>Work Tasks</h2>
+		<div class="span1 unit instructions">
+			
+			<div class="task">
+			<h3 id="clone">clone</h3>
+				<p>Librarians with premission can clone github repositories to either production or development:</p>
+<pre>Bruce clone SERVER GITHUB_SSH_URL [PATH]</pre>
+
+					<dl>
+						<dt><b>SERVER</b></dt>
+							<dd>&#8211; dev :: gvsulib.com</dd>
+							<dd>&#8211; prod :: labs.library.gvsu.edu</dd>
+						<dt><b>[PATH]</b></dt>
+							<dd>&#8211; The relative path to the directory you want to clone into. If you don't specify a directory, Bruce will clone into the web server root directory.</dd>
+					</dl>
+
+					<p>If I wanted to clone the repository at <a href="https://github.com/gvsulib/migrator-production">https://github.com/gvsulib/migrator-production</a> onto the production server at http://labs.library.gvsu.edu/awesome/migrator-production, I would type:</p>
+<pre>Bruce clone prod git@github.com:gvsulib/migrator-production.git awesome</pre>
+					<p>If I just wanted to clone the repo to http://labs.library.gvsu.edu/migrator-production, then I would say:</p>
+					<pre>Bruce clone prod git@github.com:gvsulib/migrator-production.git</pre>
+			</div>
+			<div class="task">
+			<h3 id="deploy">deploy</h3>
+				<p>If you have permissions, Bruce can deploy code from github to either the production or development server:</p>
+<pre>Bruce deploy SERVER PATH [BRANCH]</pre>
+
+					<dl>
+						<dt><b>SERVER</b></dt>
+							<dd>&#8211; dev :: gvsulib.com</dd>
+							<dd>&#8211; prod :: labs.library.gvsu.edu</dd>
+					</dl>
+
+					<p>If I wanted to deploy the project in labs/summon_usage on our development server, I would type:</p>
+<pre>Bruce deploy dev labs/summon_usage</pre>
+					<p>If you do not specify a branch, Bruce will deploy the master branch.</p>
+				</div>
+				<div class="task">
+			<h3 id="iamworkingon">i am working on</h3>
+				<p>Tell Bruce what you are currently working on, so we don't have to have as many status meetings:</p>
+<pre>Bruce I am working on [Text]</pre>
+
+					<p>You can just enter free text for [Text]. Since I'm working on the Bruce Bot Cheat Sheet, I could type:</p>
+<pre>Bruce I am working on the Bruce Bot Cheat Sheet</pre>
+					<p>Bruce will store your most current status update.</p>
+				</div>
+
+				<div class="task">
+			<h3 id="whatiseveryoneworkingon">What is everyone working on?</h3>
+				<p>Have Bruce output everyone's current project, as set with '<a href="#iamworkingon">I am working on</a>.'</p>
+<pre>Bruce What is everyone working on?</pre>
+				</div>
+
+		</div>
+	</div>
+
+	<div class="line" id="images">
+
+		<h2>Images</h2>
+
+		<div class="span1 unit instructions">
+
+			<div class="task">
+				<h3 id="image">image</h3>
+				
+				<p>Searches Google Images for the given input and returns the most relevant result. Use @twitterusername to get a user's twitter picture.</p>
+
+				<pre>Bruce image 'Grumpy Cat'</pre>
+
+			</div>
+
+			<div class="task">
+				<h3 id="clown">clown</h3>
+				
+				<p>Add a clown nose to anyone's face. Use a URL to pass an image directly to server. @twittername for a user's twitter picture. Otherwise it searches for a google image and applys the clown nose to it.</p>
+
+				<pre>Bruce clown 'Dick Cheney'</pre>
+
+			</div>
+
+			<div class="task">
+				<h3 id="mustache">mustache</h3>
+				
+				<p>Add mustache to anyone's face. Use a URL to pass an image directly to server. @twittername for a user's twitter picture. Otherwise it searches for a google image and applys the mustache to it.</p>
+</p>
+
+				<pre>Bruce mustache http://upload.wikimedia.org/wikipedia/commons/thumb/1/17/Rumsfeld1.jpg/220px-Rumsfeld1.jpg</pre>
+
+			</div>
+
+			<div class="task">
+				<h3 id="scumbag">scumbag</h3>
+				
+				<p>Add scumbag hat to anyone's face. Use a URL to pass an image directly to server. @twittername for a user's twitter picture. Otherwise it searches for a google image and applys the scumbag hat to it.</p>
+
+				<pre>Bruce scumbag @mreidsma</pre>
+
+			</div>
+
+		</div>
+	</div>	
+
+	<div class="line" id="search">
+		<h2>Search</h2>
+
+		<div class="span1 unit instructions">
+
+			<div class="task">
+				<h3 id="google">google</h3>
+				
+				<p>Return the first result from google. Like I'm feeling lucky.</p>
+
+				<pre>Bruce google awesomesauce</pre>
+
+			</div>
+
+			<div class="task">
+				<h3 id="wiki">wiki</h3>
+				
+				<p>Searches Wikipedia.org for the given input and returns a link to the most relevant article.</p>
+
+				<pre>Bruce wiki bronies</pre>
+
+			</div>
+
+			<div class="task">
+				<h3 id="youtube">youtube</h3>
+				
+				<p>Searches Youtube for the given input and returns the most relevant video.</p>
+
+				<pre>Bruce youtube 'ukulele stairway to heaven'</pre>
+
+			</div>
+
+			<div class="task">
+				<h3 id="twitter">twitter</h3>
+				
+				<p>Searches Twitter for the given input and returns the first tweet.</p>
+
+				<pre>Bruce twitter 'library website'</pre>
+
+			</div>
+
+			<div class="task">
+				<h3 id="eat">eat</h3>
+				
+				<p>Find a place to eat near your address, eg. !eat within 2 miles from San Francisco, CA</p>
+
+				<pre>Bruce eat Grand Rapids, MI</pre>
+
+			</div>
+
+		</div>
+	</div>
+
+	<div class="line" id="sounds">
+		<h2>Sounds</h2>
+
+		<div class="span1 unit instructions">
+			<p>Sounds are built into Campfire and you do not have to address Bruce to use them.</p>
+		
+		<div class="span3 unit left instuctions">
+			<ul>
+				<li>/play secret</li>
+				<li>/play rimshot</li>
+				<li>/play live</li>
+				<li>/play greatjob</li>
+				<li>/play tada</li>
+				<li>/play ohyeah</li>
+				<li>/play horn</li>
+				<li>/play yodel</li>
+				<li>/play heygirl</li>
+				<li>/play whoomp</li>
+				<li>/play bezos</li>
+				<li>/play sexyback</li>
+			</ul>
+
+		</div>
+
+		<div class="span3 unit left instuctions">
+			<ul>
+				<li>/play trombone</li>
+				<li>/play vuvuzela</li>
+				<li>/play drama</li>
+				<li>/play pushit</li>
+				<li>/play ohmy</li>
+				<li>/play 56k</li>
+				<li>/play horror</li>
+				<li>/play sax</li>
+				<li>/play inconceivable</li>
+				<li>/play clowntown</li>
+				<li>/play trololo</li>
+				<li>/play bell</li>
+			</ul>
+		</div>
+
+		<div class="span3 unit left instuctions lastUnit">
+			<ul>
+				<li>/play crickets</li>
+				<li>/play tmyk</li>
+				<li>/play yeah</li>
+				<li>/play nyan</li>
+				<li>/play bueller</li>
+				<li>/play dangerzone</li>
+				<li>/play loggins</li>
+				<li>/play noooo</li>
+				<li>/play deeper</li>
+				<li>/play what</li>
+				<li>/play makeitso</li>
+			</ul>
+		</div>
+	</div>
+
+	<div class="line" id="emoji">
+		<h2>Emoji</h2>
+
+		<div class="span1 unit instructions">
+			<p>Emoji emoticons are supported on Campfire, GitHub, Basecamp, Turntable.fm, Teambox, Trac, Flowdock and Sprint.ly. However some of the emoji codes are not super easy to remember, so <a href="http://www.emoji-cheat-sheet.com/">here is a little cheat sheet</a>.</p>
+		</div>
+	</div>
+
+	<div class="line">
+		<div class="span1 unit footer">
+			<p>Bruce is a <a href="http://botriot.com">Botriot</a> bot. Many of the functions we use were written by <a href="http://matthewreidsma.com">Matthew Reidsma</a> for <abbr title="Grand Valley State University">GVSU</abbr> Libraries.</p>
+		</div>
+	</div>
+
+</div>
+
+</body>
+</html>
